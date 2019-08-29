@@ -19,16 +19,47 @@ class Grid {
         this.ctx.linewidth = 0.5;
         this.ctx.strokeStyle = "#D9D9D9"; 
 
-        for (let index = 0; index < this.gridheight/gridunit; index++) {
-            this.ctx.moveTo(0, index*gridunit);
-            this.ctx.lineTo(this.gridwidth, index*gridunit);
+        let vertMid: number = (this.gridheight/gridunit)/2;
+        let horiMid: number = (this.gridwidth/gridunit)/2;
+
+        let vIndexTop:number = vertMid; 
+        let vIndexBot:number = vertMid;
+
+        //Draw vertical lines on canvas
+        while(vIndexTop > 0 || vIndexBot < (this.gridheight/gridunit)){
+            
+            // 
+
+            this.ctx.moveTo(0, vIndexTop*gridunit);
+            this.ctx.lineTo(this.gridwidth, vIndexTop*gridunit);
             this.ctx.stroke();
+
+            this.ctx.moveTo(0, vIndexBot*gridunit);
+            this.ctx.lineTo(this.gridwidth, vIndexBot*gridunit);
+            this.ctx.stroke();
+
+            vIndexTop--;
+            vIndexBot++;
+
         }
 
-        for (let index = 0; index < this.gridwidth/gridunit; index++) {
-            this.ctx.moveTo(index*gridunit, 0);
-            this.ctx.lineTo(index*gridunit, this.gridheight);
+        let hIndexTop: number = horiMid;
+        let hIndexBot: number = horiMid;
+
+        //Draw horizontal lines on canvas
+        while(hIndexTop > 0 || hIndexBot < (this.gridheight/gridunit)){
+            
+            this.ctx.moveTo(hIndexTop*gridunit, 0);
+            this.ctx.lineTo(hIndexTop*gridunit, this.gridheight);
             this.ctx.stroke();
+
+            this.ctx.moveTo(hIndexBot*gridunit, 0);
+            this.ctx.lineTo(hIndexBot*gridunit, this.gridheight);
+            this.ctx.stroke();
+
+            hIndexTop--;
+            hIndexBot++;
+
         }
 
     }

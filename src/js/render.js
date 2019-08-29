@@ -8,15 +8,31 @@ var Grid = (function () {
     Grid.prototype.drawGrid = function (gridunit) {
         this.ctx.linewidth = 0.5;
         this.ctx.strokeStyle = "#D9D9D9";
-        for (var index = 0; index < this.gridheight / gridunit; index++) {
-            this.ctx.moveTo(0, index * gridunit);
-            this.ctx.lineTo(this.gridwidth, index * gridunit);
+        var vertMid = (this.gridheight / gridunit) / 2;
+        var horiMid = (this.gridwidth / gridunit) / 2;
+        var vIndexTop = vertMid;
+        var vIndexBot = vertMid;
+        while (vIndexTop > 0 || vIndexBot < (this.gridheight / gridunit)) {
+            this.ctx.moveTo(0, vIndexTop * gridunit);
+            this.ctx.lineTo(this.gridwidth, vIndexTop * gridunit);
             this.ctx.stroke();
+            this.ctx.moveTo(0, vIndexBot * gridunit);
+            this.ctx.lineTo(this.gridwidth, vIndexBot * gridunit);
+            this.ctx.stroke();
+            vIndexTop--;
+            vIndexBot++;
         }
-        for (var index = 0; index < this.gridwidth / gridunit; index++) {
-            this.ctx.moveTo(index * gridunit, 0);
-            this.ctx.lineTo(index * gridunit, this.gridheight);
+        var hIndexTop = horiMid;
+        var hIndexBot = horiMid;
+        while (hIndexTop > 0 || hIndexBot < (this.gridheight / gridunit)) {
+            this.ctx.moveTo(hIndexTop * gridunit, 0);
+            this.ctx.lineTo(hIndexTop * gridunit, this.gridheight);
             this.ctx.stroke();
+            this.ctx.moveTo(hIndexBot * gridunit, 0);
+            this.ctx.lineTo(hIndexBot * gridunit, this.gridheight);
+            this.ctx.stroke();
+            hIndexTop--;
+            hIndexBot++;
         }
     };
     Grid.prototype.clearGrid = function () {
